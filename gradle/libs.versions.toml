@@ -1,7 +1,7 @@
 [versions]
 jreleaser = "1.18.0"
 lombok = "1.18.38"
-sugar-next = "0.1.0"
+sugar-next = "0.1.1-SNAPSHOT"
 sugar-next-jackson-boot = "0.1.0"
 sugar-next-hikaricp-boot = "0.1.0"
 sugar-next-jedis-boot = "0.1.0"
