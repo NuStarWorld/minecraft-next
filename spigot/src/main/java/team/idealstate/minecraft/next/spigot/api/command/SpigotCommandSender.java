@@ -18,11 +18,12 @@
 
 package team.idealstate.minecraft.next.spigot.api.command;
 
+import java.util.Optional;
 import java.util.UUID;
 import lombok.AccessLevel;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permissible;
 import team.idealstate.sugar.next.command.CommandSender;
 import team.idealstate.sugar.validate.Validation;
@@ -31,12 +32,16 @@ import team.idealstate.sugar.validate.annotation.NotNull;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SpigotCommandSender implements CommandSender {
 
-    @NonNull
+    @NotNull
     private final Permissible holder;
 
     public static SpigotCommandSender of(@NotNull Permissible holder) {
         Validation.notNull(holder, "holder must not be null.");
         return new SpigotCommandSender(holder);
+    }
+
+    public Optional<Player> getPlayer() {
+        return Optional.ofNullable(holder instanceof Player ? (Player) holder : null);
     }
 
     @Override

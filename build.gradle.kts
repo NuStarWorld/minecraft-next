@@ -1,5 +1,3 @@
-import org.jreleaser.gradle.plugin.JReleaserExtension
-import org.jreleaser.model.Active
 import team.idealstate.glass.context.util.Extensions
 
 plugins {
@@ -63,11 +61,15 @@ subprojects {
         sonatype()
         sonatype(SNAPSHOT)
         mavenCentral()
+        maven {
+            name = "nustar-repo"
+            url = uri("https://maven.nustar.top/repository/nustar-snapshots/")
+        }
     }
 
     dependencies {
         if (!project.name.contains("example")) {
-            add("shadow", rootProject.libs.sugar.next)
+            add("shadow", "team.idealstate.sugar:sugar-next:0.1.1-20250721.140936-2")
         }
         add("api", rootProject.libs.sugar.next.jackson.boot)
         add("api", rootProject.libs.sugar.next.hikaricp.boot)
@@ -84,77 +86,11 @@ subprojects {
     Extensions.publishing(project).apply {
         repositories {
             project(project)
-        }
-        publications {
-            main {
-                pom {
-                    description.set("Coffee(Java) with sugar is sweeter.")
-                    url.set("https://github.com/ideal-state/minecraft-next")
-                    licenses {
-                        license {
-                            name.set("Apache License 2.0")
-                            url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
-                        }
-                    }
-                    scm {
-                        url.set("https://github.com/ideal-state/minecraft-next")
-                        connection.set("scm:git:https://github.com/ideal-state/minecraft-next.git")
-                        developerConnection.set("scm:git:https://github.com/ideal-state/minecraft-next.git")
-                    }
-                    developers {
-                        developer {
-                            id.set("ideal-state")
-                            name.set("ideal-state")
-                            email.set("support@idealstate.team")
-                        }
-                    }
-                }
+            maven {
+                name = "nustar-snapshots"
+                url = uri("https://maven.nustar.top/repository/nustar-snapshots/")
+                properties(project).login()
             }
-        }
-    }
-
-    if (!project.name.contains("example")) {
-        project.extensions.getByName("jreleaser").apply {
-            this as JReleaserExtension
-            deploy {
-                maven {
-                    mavenCentral {
-                        create("release") {
-                            active.set(Active.RELEASE)
-                            url.set("https://central.sonatype.com/api/v1/publisher")
-                            sign.set(false)
-                            stagingRepository("build/repository")
-                        }
-                    }
-                    nexus2 {
-                        create("snapshot") {
-                            active.set(Active.SNAPSHOT)
-                            url.set("https://central.sonatype.com/repository/maven-snapshots")
-                            snapshotUrl.set("https://central.sonatype.com/repository/maven-snapshots")
-                            sign.set(false)
-                            applyMavenCentralRules.set(true)
-                            snapshotSupported.set(true)
-                            closeRepository.set(true)
-                            releaseRepository.set(true)
-                            verifyPom.set(false)
-                            stagingRepository("build/repository")
-                        }
-                    }
-                }
-            }
-        }
-
-        tasks.register("doDeploy") {
-            dependsOn(tasks.named("test"))
-            dependsOn(tasks.named("publishAllPublicationsToProjectRepository"))
-            finalizedBy(tasks.named("jreleaserDeploy"))
-        }
-
-        tasks.register("deploy") {
-            group = "glass"
-            dependsOn(tasks.named("clean"))
-            dependsOn(tasks.named("spotlessApply"))
-            finalizedBy(tasks.named("doDeploy"))
         }
     }
 }
