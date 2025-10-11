@@ -1,6 +1,7 @@
 [versions]
 jreleaser = "1.18.0"
 lombok = "1.18.38"
+sugar-next = "0.1.1-SNAPSHOT"
 sugar-next-jackson-boot = "0.1.0"
 sugar-next-hikaricp-boot = "0.1.0"
 sugar-next-jedis-boot = "0.1.0"
@@ -16,6 +17,7 @@ jreleaser = { id = "org.jreleaser", version.ref = "jreleaser" }
 
 [libraries]
 lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
+sugar-next = { group = "team.idealstate.sugar", name = "sugar-next", version.ref = "sugar-next" }
 sugar-next-jackson-boot = { group = "team.idealstate.sugar.boot", name = "sugar-next-jackson-boot", version.ref = "sugar-next-jackson-boot" }
 sugar-next-hikaricp-boot = { group = "team.idealstate.sugar.boot", name = "sugar-next-hikaricp-boot", version.ref = "sugar-next-hikaricp-boot" }
 sugar-next-jedis-boot = { group = "team.idealstate.sugar.boot", name = "sugar-next-jedis-boot", version.ref = "sugar-next-jedis-boot" }
