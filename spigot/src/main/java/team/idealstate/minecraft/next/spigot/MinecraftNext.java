@@ -20,10 +20,8 @@ package team.idealstate.minecraft.next.spigot;
 
 import team.idealstate.minecraft.next.spigot.api.SpigotPlugin;
 import team.idealstate.sugar.next.context.Context;
-import team.idealstate.sugar.next.context.annotation.feature.EnableSugar;
 import team.idealstate.sugar.validate.annotation.NotNull;
 
-@EnableSugar
 public final class MinecraftNext extends SpigotPlugin {
     @Override
     public void onInitialize(@NotNull Context context) {}

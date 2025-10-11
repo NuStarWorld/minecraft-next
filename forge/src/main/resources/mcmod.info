@@ -1,0 +1,10 @@
+[
+  {
+    "mcversion": "${minecraft_version}",
+    "modid": "${mod_id}",
+    "name": "${mod_name}",
+    "version": "${mod_version}",
+    "authorList": ["ideal-state"],
+    "url": "mailto://support@idealstate.team"
+  }
+]

@@ -21,6 +21,7 @@ package team.idealstate.minecraft.next.spigot.example;
 import team.idealstate.minecraft.next.spigot.api.SpigotPlugin;
 import team.idealstate.sugar.next.boot.hikaricp.annotation.EnableHikariCP;
 import team.idealstate.sugar.next.boot.jackson.annotation.EnableGeneralCodec;
+import team.idealstate.sugar.next.boot.jackson.annotation.EnableJacksonJson;
 import team.idealstate.sugar.next.boot.jackson.annotation.EnableJacksonYaml;
 import team.idealstate.sugar.next.boot.jedis.annotation.EnableJedis;
 import team.idealstate.sugar.next.boot.jedis.mybatis.cache.annotation.EnableJedisMyBatisCache;
@@ -29,8 +30,7 @@ import team.idealstate.sugar.next.context.Context;
 import team.idealstate.sugar.next.context.annotation.feature.EnableSugar;
 import team.idealstate.sugar.validate.annotation.NotNull;
 
-@EnableSugar
-@EnableGeneralCodec
+@EnableJacksonJson
 @EnableJacksonYaml
 @EnableHikariCP
 @EnableJedis

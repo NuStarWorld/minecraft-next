@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Set;
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
@@ -49,23 +48,23 @@ public final class SpigotPlaceholderExpansion extends PlaceholderExpansion {
     public static final String ARGUMENTS_DELIMITER = "_";
     public static final String ARGUMENTS_DELIMITER_1 = ":";
 
-    @NonNull
+    @NotNull
     @Getter
     private final String identifier;
 
-    @NonNull
+    @NotNull
     @Getter
     private final String author;
 
-    @NonNull
+    @NotNull
     @Getter
     private final String version;
 
-    @NonNull
+    @NotNull
     @Getter
     private final CommandLine commandLine;
 
-    @NonNull
+    @NotNull
     private final List<CommandArgument.Converter<?>> converters;
 
     public static SpigotPlaceholderExpansion of(

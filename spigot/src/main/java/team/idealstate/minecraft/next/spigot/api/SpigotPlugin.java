@@ -22,7 +22,6 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.event.EventHandler;
@@ -138,40 +137,49 @@ public abstract class SpigotPlugin extends JavaPlugin implements ContextHolder, 
 
     @SuppressWarnings("rawtypes")
     private void hookPlaceholderAPI(PluginManager pluginManager, @NotNull List<Bean<Converter>> converters) {
-        pluginManager.registerEvents(new PlaceholderAPIHook(context, converters), this);
+        PlaceholderAPIHook hook = new PlaceholderAPIHook(context, converters);
+        if (pluginManager.isPluginEnabled(PlaceholderAPIHook.PLACEHOLDER_API)) {
+            hook.registerPlaceholders();
+        } else {
+            pluginManager.registerEvents(hook, this);
+        }
     }
 
     @RequiredArgsConstructor
     private static final class PlaceholderAPIHook implements Listener {
-        private static final String PLACEHOLDER_API = "PlaceholderAPI";
+        public static final String PLACEHOLDER_API = "PlaceholderAPI";
 
-        @NonNull
+        @NotNull
         private final Context context;
 
-        @NonNull
+        @NotNull
         @SuppressWarnings("rawtypes")
         private final List<Bean<Converter>> converters;
 
         @SuppressWarnings({"unchecked", "rawtypes"})
+        public void registerPlaceholders() {
+            List<Bean<Placeholder>> beans = context.getBeans(Placeholder.class);
+            if (beans.isEmpty()) {
+                return;
+            }
+            List converterList;
+            if (converters.isEmpty()) {
+                converterList = Collections.emptyList();
+            } else {
+                converterList = converters.stream().map(Bean::getInstance).collect(Collectors.toList());
+            }
+            String author = context.getName();
+            String version = context.getVersion();
+            for (Bean<Placeholder> bean : beans) {
+                SpigotPlaceholderExpansion.of(bean.getName(), author, version, bean.getInstance(), converterList)
+                        .register();
+            }
+        }
+
         @EventHandler(priority = EventPriority.LOWEST)
         public void onPlaceholderAPIEnabled(PluginEnableEvent event) {
             if (PLACEHOLDER_API.equals(event.getPlugin().getName())) {
-                List<Bean<Placeholder>> beans = context.getBeans(Placeholder.class);
-                if (beans.isEmpty()) {
-                    return;
-                }
-                List converterList;
-                if (converters.isEmpty()) {
-                    converterList = Collections.emptyList();
-                } else {
-                    converterList = converters.stream().map(Bean::getInstance).collect(Collectors.toList());
-                }
-                String author = context.getName();
-                String version = context.getVersion();
-                for (Bean<Placeholder> bean : beans) {
-                    SpigotPlaceholderExpansion.of(bean.getName(), author, version, bean.getInstance(), converterList)
-                            .register();
-                }
+                registerPlaceholders();
             }
         }
     }
