@@ -7,6 +7,10 @@ pluginManagement {
             name = "Sonatype-Snapshots"
             url = uri("https://central.sonatype.com/repository/maven-snapshots/")
         }
+        maven {
+            name = "GTNH Maven"
+            url = uri("https://nexus.gtnewhorizons.com/repository/public/")
+        }
         gradlePluginPortal()
     }
 }

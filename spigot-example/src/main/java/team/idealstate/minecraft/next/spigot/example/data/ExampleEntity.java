@@ -21,18 +21,13 @@ package team.idealstate.minecraft.next.spigot.example.data;
 import java.time.LocalDateTime;
 import lombok.Data;
 
-/** @TableName EXAMPLE_ENTITY */
 @Data
 public class ExampleEntity {
-    /** */
     private byte[] uniqueId;
 
-    /** */
     private String name;
 
-    /** */
     private LocalDateTime createdAt;
 
-    /** */
     private LocalDateTime updatedAt;
 }

@@ -22,55 +22,55 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import lombok.Data;
-import lombok.NonNull;
+import team.idealstate.sugar.validate.annotation.NotNull;
 import team.idealstate.sugar.next.context.annotation.component.Configuration;
 import team.idealstate.sugar.next.context.annotation.feature.Environment;
 
-@Configuration(uri = "/example/config.yml", release = "bundled:/example/config.yml")
+@Configuration(uri = "/example/config.yml", release = "embedded:/example/config.yml")
 @Environment("development")
 @Data
 public class ExampleConfiguration {
 
-    @NonNull
+    @NotNull
     private Byte oneByte;
 
-    @NonNull
+    @NotNull
     private Short oneShort;
 
-    @NonNull
+    @NotNull
     private Integer oneInt;
 
-    @NonNull
+    @NotNull
     private Long oneLong;
 
-    @NonNull
+    @NotNull
     private Float oneFloat;
 
-    @NonNull
+    @NotNull
     private Double oneDouble;
 
-    @NonNull
+    @NotNull
     private Character oneChar;
 
-    @NonNull
+    @NotNull
     private Boolean oneBoolean;
 
-    @NonNull
+    @NotNull
     private String oneString;
 
-    @NonNull
+    @NotNull
     private ExampleEnum oneEnum;
 
-    @NonNull
+    @NotNull
     private Object[] oneArray;
 
-    @NonNull
+    @NotNull
     private List<Integer> oneList;
 
-    @NonNull
+    @NotNull
     private Set<String> oneSet;
 
-    @NonNull
+    @NotNull
     private Map<String, Object> oneMap;
 
     public enum ExampleEnum {

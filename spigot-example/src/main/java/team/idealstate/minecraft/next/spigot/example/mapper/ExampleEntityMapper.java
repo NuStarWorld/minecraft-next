@@ -36,6 +36,7 @@ public interface ExampleEntityMapper {
 
     void createTable();
 
+    @SuppressWarnings("MybatisXMapperMethodInspection")
     @NotNull
     String ping();
 

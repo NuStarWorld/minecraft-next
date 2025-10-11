@@ -20,7 +20,6 @@ package team.idealstate.minecraft.next.spigot.api.command;
 
 import java.util.UUID;
 import lombok.AccessLevel;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Entity;
 import org.bukkit.permissions.Permissible;
@@ -31,7 +30,7 @@ import team.idealstate.sugar.validate.annotation.NotNull;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SpigotCommandSender implements CommandSender {
 
-    @NonNull
+    @NotNull
     private final Permissible holder;
 
     public static SpigotCommandSender of(@NotNull Permissible holder) {

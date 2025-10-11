@@ -26,9 +26,11 @@ import org.bukkit.Bukkit;
 import team.idealstate.sugar.logging.Log;
 import team.idealstate.sugar.logging.LogLevel;
 import team.idealstate.sugar.logging.Logger;
+import team.idealstate.sugar.service.annotation.Provides;
 import team.idealstate.sugar.validate.Validation;
 import team.idealstate.sugar.validate.annotation.NotNull;
 
+@Provides(Logger.class)
 public class SpigotLogger implements Logger {
 
     private static final Map<LogLevel, String> LEVEL_TO_COLOR =

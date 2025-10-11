@@ -44,8 +44,7 @@ import team.idealstate.sugar.next.context.aware.ContextHolderAware;
 import team.idealstate.sugar.validate.Validation;
 import team.idealstate.sugar.validate.annotation.NotNull;
 
-@Named("exampleminecraftnext")
-@Controller
+@Controller(name = "exampleminecraftnext")
 @Environment("development")
 public class ExampleController implements ContextHolderAware, Command, Placeholder {
 

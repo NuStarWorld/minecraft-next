@@ -62,23 +62,33 @@ subprojects {
         aliyun()
         sonatype()
         sonatype(SNAPSHOT)
+        maven {
+            name = "sonatype-oss-snapshots"
+            url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+        }
         mavenCentral()
     }
 
     dependencies {
-        if (!project.name.contains("example")) {
+        if (!project.name.contains("common") && !project.name.contains("example")) {
+            add("shadow", rootProject.project("${rootProject.name}-common"))
             add("shadow", rootProject.libs.sugar.next)
+            add("api", rootProject.libs.sugar.next.jackson.boot)
+            add("api", rootProject.libs.sugar.next.hikaricp.boot)
+            add("api", rootProject.libs.sugar.next.jedis.boot)
+            add("api", rootProject.libs.sugar.next.mybatis.boot)
+            add("api", rootProject.libs.sugar.next.jedis.mybatis.cache.boot)
         }
-        add("api", rootProject.libs.sugar.next.jackson.boot)
-        add("api", rootProject.libs.sugar.next.hikaricp.boot)
-        add("api", rootProject.libs.sugar.next.jedis.boot)
-        add("api", rootProject.libs.sugar.next.mybatis.boot)
-        add("api", rootProject.libs.sugar.next.jedis.mybatis.cache.boot)
+        add("compileOnly", project.fileTree("libraries"))
 
         add("compileOnly", rootProject.libs.lombok)
         add("annotationProcessor", rootProject.libs.lombok)
         add("testCompileOnly", rootProject.libs.lombok)
         add("testAnnotationProcessor", rootProject.libs.lombok)
+        add("compileOnly", rootProject.libs.sugar)
+        add("annotationProcessor", rootProject.libs.sugar)
+        add("testCompileOnly", rootProject.libs.sugar)
+        add("testAnnotationProcessor", rootProject.libs.sugar)
     }
 
     Extensions.publishing(project).apply {
@@ -113,7 +123,7 @@ subprojects {
         }
     }
 
-    if (!project.name.contains("example")) {
+    if (!project.name.contains("common") && !project.name.contains("example")) {
         project.extensions.getByName("jreleaser").apply {
             this as JReleaserExtension
             deploy {

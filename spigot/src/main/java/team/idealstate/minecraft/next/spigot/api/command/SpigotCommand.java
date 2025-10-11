@@ -20,7 +20,6 @@ package team.idealstate.minecraft.next.spigot.api.command;
 
 import java.util.List;
 import lombok.AccessLevel;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -35,12 +34,12 @@ import team.idealstate.sugar.validate.annotation.NotNull;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SpigotCommand implements TabExecutor {
 
-    @NonNull
+    @NotNull
     private final CommandLine commandLine;
 
     private final String failureMessage;
 
-    @NonNull
+    @NotNull
     private final List<Converter<?>> converters;
 
     @NotNull

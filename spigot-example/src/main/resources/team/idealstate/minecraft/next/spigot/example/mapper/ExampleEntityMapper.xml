@@ -33,7 +33,7 @@
         )
     </insert>
     
-    <select id="ping" resultType="java.lang.String">
+    <select id="ping" resultType="String">
         select 'PONG'
     </select>
     
