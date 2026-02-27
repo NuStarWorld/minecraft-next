@@ -53,6 +53,13 @@ public final class SpigotCommandSender implements CommandSender {
     }
 
     @Override
+    public void sendMessage(String message) {
+        if (holder instanceof org.bukkit.command.CommandSender) {
+            ((org.bukkit.command.CommandSender) holder).sendMessage(message);
+        }
+    }
+
+    @Override
     public boolean isAdministrator() {
         return holder.isOp();
     }
