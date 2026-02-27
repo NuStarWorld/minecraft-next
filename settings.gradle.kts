@@ -11,6 +11,9 @@ pluginManagement {
             name = "GTNH Maven"
             url = uri("https://nexus.gtnewhorizons.com/repository/public/")
         }
+        maven {
+            url = uri("https://maven.nustar.top/repository/nustar-public/")
+        }
         gradlePluginPortal()
     }
 }

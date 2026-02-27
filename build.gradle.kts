@@ -58,19 +58,15 @@ subprojects {
     }
 
     repositories {
-        mavenLocal()
-        aliyun()
-        sonatype()
-        sonatype(SNAPSHOT)
-        maven {
-            name = "sonatype-oss-snapshots"
-            url = uri("https://oss.sonatype.org/content/repositories/snapshots")
-        }
-        mavenCentral()
         maven {
             name = "nustar-repo"
             url = uri("https://maven.nustar.top/repository/nustar-snapshots/")
         }
+        mavenLocal()
+        aliyun()
+        sonatype()
+        sonatype(SNAPSHOT)
+        mavenCentral()
     }
 
     dependencies {
